@@ -1,19 +1,19 @@
 <?php
 header("content-type:text/plain");
 if (php_sapi_name() != "cli") {
-	echo "This program is to be called via commandline\n\n";
-	echo "Usage: php /path/to/script/convert.php input.gpx output.rtz step width\n";
-	echo "option: step width\n\tstep: distant between each waypoint\n\twidth: route width";
-	exit;
+  echo "This program is to be called via commandline\n\n";
+  echo "Usage: php /path/to/script/convert.php input.gpx output.rtz step width\n";
+  echo "option: step width\n\tstep: distant between each waypoint\n\twidth: route width";
+  exit;
 }
 
 if(!isset($argv[1])){
 echo "Error: Need input file name\nUsage: php /path/to/script/convert.php input.gpx output.rtz\n\n";
-	exit;
+  exit;
 }
 if(!isset($argv[2])){
 echo "Error: Need output file name\nUsage: php /path/to/script/convert.php input.gpx output.rtz\n\n";
-	exit;
+  exit;
 }
 if (isset($argv[3])){$space=$argv[3];}else{$space=0;}
 if (isset($argv[4])){$width=$argv[4];}else{$width=0.37*2;}
@@ -34,8 +34,8 @@ $op.='" optimizationMethod="MAX speed">
   <waypoints>';
 $wpt_num=1;
 foreach ($xml->trk->trkseg->trkpt as $wpt){
-	if ($wpt_num==1){
-		$op.='
+  if ($wpt_num==1){
+    $op.='
     <!--No.'.$wpt_num.' waypoint-->
     <waypoint id="'.$wpt_num.'" name="" radius="0.010000">
       <position lat="';
@@ -44,16 +44,21 @@ foreach ($xml->trk->trkseg->trkpt as $wpt){
       $op.=$wpt['lon'];
       $op.='"/>
     </waypoint>';
-    	$lastlat=$wpt['lat'];
-    	$lastlon=$wpt['lon'];
-    	$wpt_num++;
-		}
-	else {
-		$dlat = abs($wpt['lat']-$lastlat);
-		$dlon = abs($wpt['lon']-$lastlon);
-		$dist = sqrt(($dlat*$dlat) + ($dlon*$dlon))*60;
-		if ($dist >= $space){
-			$op.='
+      $lastlat=abs(floatval($wpt['lat']));
+      $lastlon=abs(floatval($wpt['lon']));
+      $wpt_num++;
+    }
+  else {
+    $curlat=abs(floatval($wpt['lat']));
+    $curlon=abs(floatval($wpt['lon']));
+    $dlat = abs(floatval($curlat)-floatval($lastlat));
+    $dlon = abs(floatval($curlon)-floatval($lastlon));
+    $dist = sqrt(($dlat*$dlat) + ($dlon*$dlon));
+    $dist_mi=$dist*60;
+    echo "lastlat $lastlat\nlastlon $lastlon\n";
+    echo "$curlat $curlon $dlat $dlon\n";
+    if ($dist_mi >= $space){
+      $op.='
     <!--No.'.$wpt_num.' waypoint-->
     <waypoint id="'.$wpt_num.'" name="" radius="0.010000">
       <position lat="';
@@ -72,13 +77,13 @@ foreach ($xml->trk->trkseg->trkpt as $wpt){
         </extension>
       </extensions>
     </waypoint>';
-    		$lastlat=$wpt['lat'];
-    		$lastlon=$wpt['lon'];
-    		$wpt_num++;
-			}
-		} // end else
+        $lastlat=$curlat;
+        $lastlon=$curlon;
+        $wpt_num++;
+      }
+    } // end else
 
-	} //end foreach
+  } //end foreach
 
 $op.='
   </waypoints>
