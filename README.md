@@ -5,10 +5,10 @@ This program is to be called via commandline
 
 Usage: 
 
-  php /path/to/script/convert.php input.gpx output.rtz step width
+  	php /path/to/script/convert.php input.gpx output.rtz step width
 
 option: step , width
 
-	step: minimum distant required between each waypoint
+	step: minimum distant required between each waypoint (nm)
   
-	width: guard width
+	width: passage width
