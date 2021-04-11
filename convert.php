@@ -55,8 +55,6 @@ foreach ($xml->trk->trkseg->trkpt as $wpt){
     $dlon = abs(floatval($curlon)-floatval($lastlon));
     $dist = sqrt(($dlat*$dlat) + ($dlon*$dlon));
     $dist_mi=$dist*60;
-    echo "lastlat $lastlat\nlastlon $lastlon\n";
-    echo "$curlat $curlon $dlat $dlon\n";
     if ($dist_mi >= $space){
       $op.='
     <!--No.'.$wpt_num.' waypoint-->
