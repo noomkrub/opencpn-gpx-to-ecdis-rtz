@@ -110,6 +110,7 @@ else if ($path['extension']=="rtz"){
 	<?xml version="1.0"?>
 	<gpx version="1.1" creator="OpenCPN" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" xmlns:opencpn="http://www.opencpn.org">
 	  <rte>
+	    <name>'.$xml->routeInfo["routeName"].'</name>
 	    <extensions>
 	      <opencpn:guid>7658ffff-7e02-4fc1-9d2c-cc8940c4ffff</opencpn:guid>
 	      <opencpn:viz>1</opencpn:viz>
