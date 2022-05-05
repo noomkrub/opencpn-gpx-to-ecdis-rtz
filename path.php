@@ -2,20 +2,20 @@
 header("content-type:text/plain");
 if (php_sapi_name() != "cli") {
   echo "This program is to be called via commandline\n\n";
-  echo "Usage: php /path/to/script/convert.php input.gpx output.rtz step width\n";
-  echo "For AS should be \"php /var/www/html/ocpn_gpx_to_ecdis/convert.php input.gpx output.rtz\"\n";
+  echo "Usage: php /path/to/script/path.php input.gpx output.rtz step width\n";
+  echo "For AS should be \"php /var/www/html/ocpn_gpx_to_ecdis/path.php input.gpx output.rtz\"\n";
   echo "option: step width\n\tstep: distant between each waypoint\n\twidth: route width";
   exit;
 }
 
 if(!isset($argv[1])){
 echo "gpx <> rtz converter\nThis program to convert between opencpn gpx and ecdis rtz.\n";
-echo "Error: Need input file name\nUsage: php /path/to/script/convert.php input.gpx(rtz) output.rtz(gpx)\n\n";
+echo "Error: Need input file name\nUsage: php /path/to/script/path.php input.gpx(rtz) output.rtz(gpx)\n\n";
   exit;
 }
 if(!isset($argv[2])){
 echo "gpx <> rtz converter\nThis program to convert between opencpn gpx and ecdis rtz.\n";
-echo "Error: Need output file name\nUsage: php /path/to/script/convert.php input.gpx(rtz) output.rtz(gpx)\n\n";
+echo "Error: Need output file name\nUsage: php /path/to/script/path.php input.gpx(rtz) output.rtz(gpx)\n\n";
   exit;
 }
 if (isset($argv[3])){$space=$argv[3];}else{$space=0;}
