@@ -5,16 +5,16 @@ header("content-type:text/plain");
 if (php_sapi_name() != "cli") {
 	echo "Utility to convert opencpn draw boundary to ecdis user chart\n";
   echo "This program is to be called via commandline\n\n";
-  echo "Usage: php /path/to/script/convert.php input.gpx output.rtz\n";
+  echo "Usage: php /path/to/script/convert.php input.gpx output.xml\n";
   exit;
 }
 
 if(!isset($argv[1])){
-echo "Error: Need input file name\nUsage: php /path/to/script/convert.php input.gpx output.rtz\n\n";
+echo "Error: Need input file name\nUsage: php /path/to/script/convert.php input.gpx output.xml\n\n";
   exit;
 }
 if(!isset($argv[2])){
-echo "Error: Need output file name\nUsage: php /path/to/script/convert.php input.gpx output.rtz\n\n";
+echo "Error: Need output file name\nUsage: php /path/to/script/convert.php input.gpx output.xml\n\n";
   exit;
 }
 
@@ -23,7 +23,9 @@ $chart_name=explode(".",$xml_in->path->name);
 
 $op='<?xml version="1.0" encoding="UTF-8"?>
 <!--userchart node-->
-<userchart name="Noom Test" description="" version="1.0">
+<userchart name="';
+$op.=$chart_name[0];
+$op.='" description="" version="1.0">
   <!--userchart area-->
   <areas>
     <area name="';
@@ -38,7 +40,7 @@ for ($i=0;$i<count ( $xml_in->path->ODPoint );$i++){
 	$op.= '" latitude="';
 	$op.= ( $xml_in->path->ODPoint[$i]->attributes()->lat);
 	$op.= '" longitude="';
-	$op.= ( $xml_in->path->ODPoint[$i]->attributes()->lat);
+	$op.= ( $xml_in->path->ODPoint[$i]->attributes()->lon);
 	$op.= '"/>';
 	$op.= "\n";
 }
@@ -55,3 +57,5 @@ fclose($f_op);
 
 echo "\nData save to ".$argv[2]."\n";
 echo "Use data as your own risk ^_^\n\n";
+
+
