@@ -24,4 +24,4 @@ This script to convert openCPN draw boundary to ecdis userchart.
 
 Require 2 argument, input file name and output file name
 
-Usage: php /path/to/script/boundary.php input.gpx output.rtz
+Usage: php /path/to/script/boundary.php input.gpx output.xml
