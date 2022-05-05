@@ -5,8 +5,7 @@ header("content-type:text/plain");
 if (php_sapi_name() != "cli") {
 	echo "Utility to convert opencpn draw boundary to ecdis user chart\n";
   echo "This program is to be called via commandline\n\n";
-  echo "Usage: php /path/to/script/convert.php input.gpx output.xml\n\n";
-	echo "Before use this tool need to remove 'opencpn:' from text file first. \nIn todo list for next update";
+  echo "Usage: php /path/to/script/convert.php input.gpx output.xml\n";
   exit;
 }
 
@@ -19,7 +18,11 @@ echo "Error: Need output file name\nUsage: php /path/to/script/convert.php input
   exit;
 }
 
-$xml_in=simplexml_load_file($argv[1]);
+$argv[1]="survey2.gpx";
+$file=file_get_contents($argv[1]);
+$file=str_replace("opencpn:","",$file);
+$xml_in=simplexml_load_string($file);
+//$xml_in=simplexml_load_file($argv[1]);
 $chart_name=explode(".",$xml_in->path->name);
 
 $op='<?xml version="1.0" encoding="UTF-8"?>
@@ -56,7 +59,6 @@ $f_op=fopen($argv[2],'w');
 fwrite($f_op,$op);
 fclose($f_op);
 
+//echo $op;
 echo "\nData save to ".$argv[2]."\n";
 echo "Use data as your own risk ^_^\n\n";
-
-
