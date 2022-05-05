@@ -5,7 +5,8 @@ header("content-type:text/plain");
 if (php_sapi_name() != "cli") {
 	echo "Utility to convert opencpn draw boundary to ecdis user chart\n";
   echo "This program is to be called via commandline\n\n";
-  echo "Usage: php /path/to/script/convert.php input.gpx output.xml\n";
+  echo "Usage: php /path/to/script/convert.php input.gpx output.xml\n\n";
+	echo "Before use this tool need to remove 'opencpn:' from text file first. \nIn todo list for next update";
   exit;
 }
 
