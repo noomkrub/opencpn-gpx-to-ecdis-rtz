@@ -1,6 +1,6 @@
 <?php
 $script = "converter.php";
-
+?>This tool is for convert route format between ECIDS RTZ <-> openCPN GPX format <?php
 $m = $_REQUEST["m"];
 if (!$m) { ?>
 	<form action="<?php echo $script; ?>"  method="post" enctype="multipart/form-data">
